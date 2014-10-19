@@ -33,9 +33,10 @@ namespace GSNchat
             //}
 
             var orchestrate = new Orchestrate.Net.Orchestrate("0b42c04c-0d70-4da8-a3c1-2036882369d0");
-            var result = orchestrate.Search("users", "Taiseer", 1);
-            if (result.Count == 0) { 
-                
+            var result = orchestrate.Search("users", context.UserName, 1);
+            if (result.Count == 0) {
+                        context.SetError("invalid_grant", "The user name or password is incorrect.");
+                       return;
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
