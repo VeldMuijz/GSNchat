@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSNchat", "GSNchat\GSNchat.csproj", "{D41D4613-34DF-4875-933D-1EAA8C94A1CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSNchat.Backend", "GSNchat\GSNchat.Backend.csproj", "{D41D4613-34DF-4875-933D-1EAA8C94A1CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
