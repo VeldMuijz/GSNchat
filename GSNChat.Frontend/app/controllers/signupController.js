@@ -6,6 +6,9 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
 
     $scope.registration = {
         userName: "",
+        firstName: "",
+        lastName: "",
+        email: "",
         password: "",
         confirmPassword: ""
     };
