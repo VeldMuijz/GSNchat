@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using System.Web.Http;
 
 namespace GSNchat.Controllers
@@ -29,20 +28,14 @@ namespace GSNchat.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
-         
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (userModel.ConfirmPassword.Equals(userModel.Password)) {
-                var hash = Crypto.HashPassword(userModel.Password);
-                userModel.Password = hash;
-                userModel.ConfirmPassword = hash;
-            }
             var orchestrate = new Orchestrate.Net.Orchestrate("0b42c04c-0d70-4da8-a3c1-2036882369d0");
 
-           var result = orchestrate.Put("users",userModel.UserName, JsonConvert.SerializeObject(userModel));
+
+           var result = orchestrate.Put("users", "2", JsonConvert.SerializeObject(userModel));
  
             ////IHttpActionResult errorResult = GetErrorResult(result);
  
