@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSNchat.Backend", "GSNchat\GSNchat.Backend.csproj", "{D41D4613-34DF-4875-933D-1EAA8C94A1CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSNChat.Frontend", "GSNChat.Frontend\GSNChat.Frontend.csproj", "{1B4D4098-F6AA-42B1-9E36-794EDCAE287A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D41D4613-34DF-4875-933D-1EAA8C94A1CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D41D4613-34DF-4875-933D-1EAA8C94A1CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D41D4613-34DF-4875-933D-1EAA8C94A1CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4D4098-F6AA-42B1-9E36-794EDCAE287A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4D4098-F6AA-42B1-9E36-794EDCAE287A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4D4098-F6AA-42B1-9E36-794EDCAE287A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4D4098-F6AA-42B1-9E36-794EDCAE287A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
