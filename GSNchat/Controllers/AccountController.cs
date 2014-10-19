@@ -36,11 +36,14 @@ namespace GSNchat.Controllers
             }
 
             if (userModel.ConfirmPassword.Equals(userModel.Password)) {
-                var hashpw = Crypto.HashPassword(userModel.Password);               
-                var haseml = Crypto.Hash(userModel.Email);
+                var hashpw = Crypto.HashPassword(userModel.Password);
+               // var hasheml = Crypto.Hash(userModel.Email);
+                
+               
                 userModel.Password = hashpw;
                 userModel.ConfirmPassword = hashpw;
-                userModel.Email = haseml;
+               
+                
             }
             var orchestrate = new Orchestrate.Net.Orchestrate("0b42c04c-0d70-4da8-a3c1-2036882369d0");
 
