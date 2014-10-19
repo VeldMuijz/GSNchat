@@ -20,6 +20,11 @@ namespace GSNchat.Models
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string Email { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
