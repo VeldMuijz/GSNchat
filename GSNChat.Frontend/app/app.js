@@ -22,6 +22,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/orders.html"
     });
 
+    $routeProvider.when("/chat", {
+        controller: "chatController",
+        templateUrl: "/app/views/chatbox.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 });
 
