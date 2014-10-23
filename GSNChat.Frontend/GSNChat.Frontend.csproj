@@ -58,8 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Chat.js" />
+    <Content Include="app\controllers\chatController.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\controllers\ordersController.js" />
+    <Content Include="app\services\chatService.js" />
     <Content Include="app\views\chatbox.html" />
     <Content Include="app\views\orders.html" />
     <Content Include="Content\css\bootstrap-theme.css" />
