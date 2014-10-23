@@ -1,9 +1,11 @@
 ﻿using GSNchat.App_Start;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
 using System.Web.Http;
+using System.Web.Routing;
 [assembly: OwinStartup(typeof(GSNchat.Startup))]
 namespace GSNchat
 {
@@ -11,10 +13,14 @@ namespace GSNchat
     {
         public void Configuration(IAppBuilder app)
         {
-
+            
             ConfigureOAuth(app);
+
             // Any connection or hub wire up and configuration should go here
-            app.MapSignalR();
+            // Add EnableJsonP = true to enable crossdomain requests
+            var hubConfig = new HubConfiguration();
+            hubConfig.EnableJSONP = true;
+            app.MapSignalR(hubConfig);
 
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
