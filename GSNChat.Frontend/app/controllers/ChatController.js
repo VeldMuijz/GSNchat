@@ -22,8 +22,12 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
             var chatObject = { "user": name, "message": message, "timestamp": "14:00", "groupId": "" };
 
-            chatService.storeMessage(chatObject);
-            $scope.apply;
+            
+            $scope.$apply(function () {
+                chatService.storeMessage(chatObject);
+                $scope.chatStore = chatService.getStore();
+
+            });
             // Old logic to append to chatfeed:$('#chatboxfeed').append("<p class=\"row\"><div class=\"col-sm-2 \">" + name + ":</div><div class=\"col-sm-8 \">" + message + "</div><div class=\"col-sm-2 right \">20-10-2014 08:00</div</p>");
 
         };

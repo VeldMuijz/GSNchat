@@ -11,12 +11,10 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
 
     return {
 
-        sendMessage: function (userName, message) {
-
-            // Simple POST request example (passing data) :
+        sendMessage: function (name, message) {
 
             var request =
-            $http.post('http://localhost:41021/api/chat/sendmessage', { userName: userName, message: message })
+            $http.post('http://localhost:41021/api/chat/sendmessage', { userName: name, message: message })
 
             return (request.then(handleSuccess, handleError));
 
@@ -24,7 +22,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
         storeMessage: function (chat) {
             //E.g.: { "user": "Test1", "message": "message Content", "timestamp": "14:00", "groupId": "" }
             chatStore.push(chat);
-            
+            return true;
         },
         getStore: function () {
             
@@ -57,7 +55,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
     }
 
 
-    // I transform the successful response, unwrapping the application data
+    // Transform the successful response, unwrapping the application data
     // from the API response payload.
     function handleSuccess(response) {
 
