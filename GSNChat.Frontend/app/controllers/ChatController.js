@@ -3,7 +3,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
     
     if (!authService.authentication.isAuth) {
         //no authenticated or not longer authenticated
-        alert("U bent niet langer aangemeld")
+        alert("U bent niet (langer) aangemeld.")
         $location.path('/login');
 
 
@@ -15,7 +15,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         var serviceBase = 'http://localhost:41021/';
 
         var chat = $.connection.chatHub;
-        $.connection.hub.url = 'http://localhost:41021/signalr';
+        $.connection.hub.url = 'http://localhost:41021/signalr/hubs';
 
         chat.client.broadcastMessage = function (name, message) {
 
@@ -30,7 +30,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
             $('#sendmessage').click(function () {
                 // Call the Send method on the hub.
-                chat.server.send('Chatclient', $('#chatmessage').val());
+                chat.server.send($scope.userName, $('#chatmessage').val());
                 // Clear text box and reset focus for next comment.
                 $('#chatmessage').val('').focus();
             });
