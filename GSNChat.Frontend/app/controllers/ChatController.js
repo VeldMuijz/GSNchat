@@ -14,6 +14,15 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         $scope.chatStore = chatService.getStore();
 
         $scope.userName = authService.authentication.userName;
+        $scope.sendMessage = function () {
+            // Call the Send method on the hub.
+            //chat.server.send($scope.userName, $('#chatmessage').val());
+
+            chatService.sendMessage($scope.userName, $('#chatmessage').val());
+
+            // Clear text box and reset focus for next comment.
+            $('#chatmessage').val('').focus();
+        }
 
         var chat = $.connection.chatHub;
         $.connection.hub.url = $scope.backend + '/signalr/hubs';
@@ -35,15 +44,15 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         //Have to add jsonp = true for crossdomain requests
         $.connection.hub.start({ jsonp: true }).done(function () {
 
-            $('#sendmessage').click(function () {
-                // Call the Send method on the hub.
-                //chat.server.send($scope.userName, $('#chatmessage').val());
+            //$('#sendmessage').click(function () {
+            //    // Call the Send method on the hub.
+            //    //chat.server.send($scope.userName, $('#chatmessage').val());
 
-                $scope.message = chatService.sendMessage($scope.userName, $('#chatmessage').val());
+            //    chatService.sendMessage($scope.userName, $('#chatmessage').val());
 
-                // Clear text box and reset focus for next comment.
-                $('#chatmessage').val('').focus();
-            });
+            //    // Clear text box and reset focus for next comment.
+            //    $('#chatmessage').val('').focus();
+            //});
         });
 
     }
