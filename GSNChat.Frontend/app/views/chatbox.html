@@ -55,6 +55,9 @@
                 </p>
             </div>
             <!-- Chatmessages end -->
+            <div data-ng-hide="message == ''" class="alert alert-danger">
+                {{message}}
+            </div>
             <!-- Chat input -->
             <div class="input-group panel-footer col-sm-12">
                 <span id="sendmessage" class="input-group-addon">Send</span>
