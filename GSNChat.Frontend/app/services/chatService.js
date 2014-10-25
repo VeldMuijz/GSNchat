@@ -1,6 +1,14 @@
 ﻿'use strict';
 app.factory('chatService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
+    var chatStore = [
+        { "user":"System", "message":"Welkom bij de GSNChat!", "timestamp":"14:00", "groupId":"" },
+        { "user":"Test1", "message":"testbericht uit chatStore", "timestamp":"14:00", "groupId":"" },
+        { "user":"Test1", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" },
+        { "user":"Test2", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" }
+    ];
+
+
     return {
 
         sendMessage: function (userName, message) {
@@ -12,6 +20,15 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
 
             return (request.then(handleSuccess, handleError));
 
+        },
+        storeMessage: function (chat) {
+            //E.g.: { "user": "Test1", "message": "message Content", "timestamp": "14:00", "groupId": "" }
+            chatStore.push(chat);
+            
+        },
+        getStore: function () {
+            
+            return angular.fromJson(chatStore);
         }
 
     }
@@ -44,7 +61,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
     // from the API response payload.
     function handleSuccess(response) {
 
-        return (response.data);
+        return true;
 
     }
 

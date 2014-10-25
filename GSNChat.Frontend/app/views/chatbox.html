@@ -1,5 +1,5 @@
 ﻿<!-- Chat container -->
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="chatController">
     <div class="row">
         <!-- Chatbox -->
         <div class="panel-default col-sm-10">
@@ -32,7 +32,7 @@
             </li>
         </ul>-->
 
-                <p class="row">
+                <!--<p class="row">
                     <div class="col-sm-2 ">Erik de Klerk:</div>
                     <div class="col-sm-8 ">Gekke huis ditGekke huis ditGekke huis ditGekke huis dit<br />Gekke huis ditGekke huis ditGekke huis dit</div>
                     <div class="col-sm-2 right ">20-10-2014 08:00</div>
@@ -52,10 +52,16 @@
                     <div class="col-sm-2 ">Erik de Klerk:</div>
                     <div class="col-sm-8 ">Gekke huis ditGekke huis ditGekke huis ditGekke huis ditGekke huis ditGekke huis ditGekke huis dit</div>
                     <div class="col-sm-2 right ">20-10-2014 08:00</div>
-                </p>
+                </p>-->
+                
+                <div class="row" ng-repeat="chatmessage in chatStore">
+                    <div class="col-sm-2 ">{{chatmessage.user}}</div>
+                    <div class="col-sm-8 ">{{chatmessage.message}}</div>
+                    <div class="col-sm-2 right ">{{chatmessage.timestamp}}</div>
+                </div>
             </div>
             <!-- Chatmessages end -->
-            <div data-ng-hide="message == ''" class="alert alert-danger">
+            <div data-ng-hide="message === '' " class="alert alert-danger">
                 {{message}}
             </div>
             <!-- Chat input -->
