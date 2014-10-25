@@ -12,8 +12,9 @@ namespace GSNchat.Models
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
-
+        [Required]
         public string Message { get; set; }
+        public long GroupID { get; set; }
 
     }
 }
