@@ -1,13 +1,15 @@
 ﻿<!-- Chat container -->
-<div class="container-fluid" ng-controller="chatController">
+<div class="" ng-controller="chatController">
     <div class="row">
         <!-- Chatbox -->
-        <div class="panel-default col-sm-10">
+        <div class="panel panel-default col-sm-10">
             <!-- TODO: Create chatbox per user -->
-            <div class="panel-heading nav"><li class="navbar-brand">ChatBox</li><input class="form-control navbar-right" ng-model="search" placeholder="Filter op user..." /> </div>
+            <div class="panel-heading nav">
+                <div class="navbar-brand">ChatBox</div><input class="form-control navbar-right" ng-model="search" placeholder="Filter op user..." />
+            </div>
             <!-- Chatmessages -->
             <!-- TODO: Add a loading item when connection to hub -->
-            <div id="chatboxfeed" class="panel-body">
+            <div id="chatboxfeed" class="panel-body" >
                 <div class="row" ng-repeat="chatmessage in chatStore | filter:search">
                     <div class="col-sm-2 ">{{chatmessage.user}}</div>
                     <div class="col-sm-8 ">{{chatmessage.message}}</div>
@@ -19,18 +21,55 @@
                 {{message}}
             </div>
             <!-- Chat input -->
-            <div class="input-group panel-footer col-sm-12">
+            <div class="panel-footer input-group  col-sm-12">
                 <span id="sendmessage" class="input-group-addon" ng-click="sendMessage()">Send</span>
-                <textarea id="chatmessage" class="form-control" style="width:100%;" placeholder="Type je bericht hier...."></textarea>
+                <textarea id="chatmessage" class="form-control" placeholder="Type je bericht hier...."></textarea>
             </div>
             <!-- Chat input -->
         </div>
+       
 
         <!-- Chatbox end -->
         <!-- Side menu for users -->
-        <div class="col-sm-2">
+        <div class="col-sm-2 sidebar col-sm-offset-10">
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#">Chatbox</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
+                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
+                <li><a href="#">Jan Smit</a></li>
                 <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
                 <li><a href="#">Jan Smit</a></li>
             </ul>
