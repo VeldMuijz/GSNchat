@@ -1,0 +1,32 @@
+﻿
+html,body {
+
+	height:100%;
+
+}
+.row, .container-fluid, .panel-default, .panel{
+    height:90%;
+}
+
+ .panel-body {
+    min-height: 530px;
+    max-height: 530px;
+    overflow-y:scroll;
+}
+
+ .sidebar {
+  background-color: #CCCCCC;
+}
+
+@media (min-width: 992px) {
+  .sidebar {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    background-color: #CCCCCC;
+    overflow-y:scroll;
+  }
+}
