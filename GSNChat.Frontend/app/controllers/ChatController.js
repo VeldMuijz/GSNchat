@@ -9,19 +9,29 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         $location.path('/login');
 
     } else {
-
+        $scope.userName = authService.authentication.userName;
         var chat = $.connection.chatHub;
+        $.connection.hub.qs = 'user=' + $scope.userName;
         $scope.backend = 'http://localhost:41021';
         $.connection.hub.url = $scope.backend + '/signalr/hubs';
         $scope.message = '';
         $scope.chatStore = chatService.getStore();
-        $scope.userName = authService.authentication.userName;
+        $scope.userStore = chatService.getUsers();
 
         $scope.sendMessage = function () {
             chatService.sendMessage($scope.userName, $('#chatmessage').val());
             // Clear text box and reset focus for next comment.
             $('#chatmessage').val('').focus();
         }
+
+        chat.client.userLogin = function () {
+
+        }
+
+        chat.client.userLogOff = function (){
+        
+        }
+
 
         chat.client.broadcastMessage = function (name, message) {
             var chatObject = { "user": name, "message": message, "timestamp": "14:00", "groupId": "" };

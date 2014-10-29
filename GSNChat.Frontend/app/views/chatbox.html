@@ -9,7 +9,7 @@
             </div>
             <!-- Chatmessages -->
             <!-- TODO: Add a loading item when connection to hub -->
-            <div id="chatboxfeed" class="panel-body" >
+            <div id="chatboxfeed" class="panel-body">
                 <div class="row" ng-repeat="chatmessage in chatStore | filter:search">
                     <div class="col-sm-2 ">{{chatmessage.user}}</div>
                     <div class="col-sm-8 ">{{chatmessage.message}}</div>
@@ -27,52 +27,19 @@
             </div>
             <!-- Chat input -->
         </div>
-       
+
 
         <!-- Chatbox end -->
         <!-- Side menu for users -->
         <div class="col-sm-2 sidebar col-sm-offset-10">
-            <ul class="nav nav-pills nav-stacked">
+            <div class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#">Chatbox</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-                <li><a href="#">Erik de Klerk <span class="badge pull-right">42</span></a></li>
-                <li><a href="#">Jan Smit</a></li>
-            </ul>
+                <li ng-repeat="user in userStore">
+                    <a href="#">{{user.user}} <span class="badge pull-right"></span></a>
+                </li>
+
+            </div>
+
         </div>
         <!-- End Side menu for users -->
 

@@ -8,6 +8,11 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
         { "user":"Test2", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" }
     ];
 
+    var userStore = [
+        { "user": "testuser", "connectionId": "123456" },
+        { "user": "Klei", "connectionId": "123456" }
+
+    ];
 
     return {
 
@@ -27,6 +32,16 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
         getStore: function () {
             
             return angular.fromJson(chatStore);
+        },
+
+        getUsers: function () {
+
+            return angular.fromJson(userStore);
+        },
+        addUser: function (user) {
+
+            userStore.push(user);
+
         }
 
     }
