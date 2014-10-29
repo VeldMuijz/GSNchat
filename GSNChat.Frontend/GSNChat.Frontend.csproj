@@ -69,6 +69,7 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\loading-bar.css" />
     <Content Include="Content\css\Site.css" />
     <Content Include="app\controllers\homeController.js" />

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
+
 namespace GSNchat.Controllers
 {
     /// <summary>
@@ -16,6 +17,7 @@ namespace GSNchat.Controllers
     [RoutePrefix("api/chat")]
     public class ChatController : ApiController
     {
+
         /// <summary>
         /// 
         /// </summary>
@@ -62,6 +64,9 @@ namespace GSNchat.Controllers
 
             return Ok();
         }
+
+
+
 
 
         // GET: api/Chat

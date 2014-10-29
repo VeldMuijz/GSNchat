@@ -194,6 +194,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AuthContext.cs" />
     <Compile Include="AuthRepository.cs" />
+    <Compile Include="ChatConnection.cs" />
     <Compile Include="ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
