@@ -9,8 +9,8 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
     ];
 
     var userStore = [
-        { "user": "testuser", "connectionId": "123456" },
-        { "user": "Klei", "connectionId": "123456" }
+        { "name": "testuser", "connectionId": "123456" },
+        { "name": "Klei", "connectionId": "123456" }
 
     ];
 
