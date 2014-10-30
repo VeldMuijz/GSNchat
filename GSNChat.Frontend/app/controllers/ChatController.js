@@ -25,7 +25,8 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         }
 
         chat.client.userLogin = function () {
-
+            alert("User Logged in");
+            $scope.userStore = chatService.getUsers();
         }
 
         chat.client.userLogOff = function (){

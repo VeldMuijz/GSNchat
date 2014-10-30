@@ -9,8 +9,8 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
     ];
 
     var userStore = [
-        { "name": "testuser", "connectionId": "123456" },
-        { "name": "Klei", "connectionId": "123456" }
+        //{ "name": "testuser", "connectionId": "123456" },
+        //{ "name": "Klei", "connectionId": "123456" }
 
     ];
 
@@ -36,13 +36,23 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
 
         getUsers: function () {
 
+            var request = $http.get('http://localhost:41021/api/chat/sendmessage').
+                success(function (data, status, headers, config) {
+                    userStore = data;
+            }).
+             error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+            
+
             return angular.fromJson(userStore);
         },
         addUser: function (user) {
 
             userStore.push(user);
 
-        }
+        }        
 
     }
 
