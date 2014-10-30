@@ -74,9 +74,16 @@ namespace GSNchat.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetAllConnectedUsers()
         {
-            var connectedUsers = ChatHub._connections;
+            var connectedUsers = ChatHub._connections.GetAll;
+            List<ConnectedUserModel> users = new List<ConnectedUserModel>();
+            
+            
+            foreach (KeyValuePair<string, HashSet<string>> entry in connectedUsers) {
+                ConnectedUserModel user = new ConnectedUserModel { Name = entry.Key, ConnectionID = entry.Value };
+                users.Add(user);
+            }
 
-            return Ok(connectedUsers.GetAll);
+            return Ok(users);
         }
 
 

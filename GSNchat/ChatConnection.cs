@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace GSNchat
 {
-    public class ChatConnection
-    {
+    public class ChatConnection     {
 
         public class ConnectionMapping<T>
+
         {
             private readonly Dictionary<T, HashSet<string>> _connections =
                 new Dictionary<T, HashSet<string>>();
