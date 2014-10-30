@@ -6,7 +6,7 @@ namespace GSNchat
 {
     public class ChatHub : Hub
     {
-        private readonly static GSNchat.ChatConnection.ConnectionMapping<string> _connections =
+        public readonly static GSNchat.ChatConnection.ConnectionMapping<string> _connections =
             new GSNchat.ChatConnection.ConnectionMapping<string>();
         public void Send(string name, string message)
         {

@@ -21,6 +21,14 @@ namespace GSNchat
                 }
             }
 
+            public Dictionary<T, HashSet<string>> GetAll
+            {
+                get
+                {
+                    return _connections;
+                }
+
+            }
             public void Add(T key, string connectionId)
             {
                 lock (_connections)
@@ -46,6 +54,7 @@ namespace GSNchat
                 {
                     return connections;
                 }
+
 
                 return Enumerable.Empty<string>();
             }

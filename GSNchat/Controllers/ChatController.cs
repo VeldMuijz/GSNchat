@@ -55,7 +55,7 @@ namespace GSNchat.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>       
-        [Route("sendmessage/joinchat/{groupID:long}")]
+        [Route("joinchat/{groupID:long}")]
         [HttpPost]
         public async Task<IHttpActionResult> JoinGroup(ChatModel model)
         {
@@ -65,7 +65,19 @@ namespace GSNchat.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>       
+        [Route("getConnections")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllConnectedUsers()
+        {
+            var connectedUsers = ChatHub._connections;
 
+            return Ok(connectedUsers.GetAll);
+        }
 
 
 
