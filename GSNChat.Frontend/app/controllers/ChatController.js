@@ -16,7 +16,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         $.connection.hub.url = $scope.backend + '/signalr/hubs';
         $scope.message = '';
         $scope.chatStore = chatService.getStore();
-        $scope.userStore = chatService.getUsers();
+        $scope.userStore;
 
         $scope.sendMessage = function () {
             chatService.sendMessage($scope.userName, $('#chatmessage').val());
@@ -25,9 +25,16 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         }
 
         chat.client.userLogin = function () {
-            alert("User Logged in");
-            $scope.userStore = chatService.getUsers();
-        }
+            //alert("User Logged in");
+
+            chatService.getUsers().then(function (response) {
+                alert(angular.toJson(response.data));
+                $scope.userStore = response.data;
+                console.log($scope.userStore[0].name)
+            });
+
+            
+            }
 
         chat.client.userLogOff = function (){
         

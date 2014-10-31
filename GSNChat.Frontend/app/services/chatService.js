@@ -7,12 +7,11 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
         { "user":"Test1", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" },
         { "user":"Test2", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" }
     ];
-
-    var userStore = [
+    var promise;
+    var userStore; 
         //{ "name": "testuser", "connectionId": "123456" },
         //{ "name": "Klei", "connectionId": "123456" }
 
-    ];
 
     return {
 
@@ -36,17 +35,16 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
 
         getUsers: function () {
 
-            var request = $http.get('http://localhost:41021/api/chat/sendmessage').
-                success(function (data, status, headers, config) {
-                    userStore = data;
-            }).
-             error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
-            
+             promise = $http.get('http://localhost:41021/api/chat/getconnections').
+                then(function (data, status, headers, config) {
+                    console.log(data)
 
-            return angular.fromJson(userStore);
+                    return data;
+
+            });
+            
+            return promise;
+            
         },
         addUser: function (user) {
 
