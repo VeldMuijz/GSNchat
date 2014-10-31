@@ -2,10 +2,8 @@
 app.factory('chatService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
     var chatStore = [
-        { "user":"System", "message":"Welkom bij de GSNChat!", "timestamp":"14:00", "groupId":"" },
-        { "user":"Test1", "message":"testbericht uit chatStore", "timestamp":"14:00", "groupId":"" },
-        { "user":"Test1", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" },
-        { "user":"Test2", "message":"testbericht uit chatStore2", "timestamp":"14:00", "groupId":"" }
+        { "user":"System", "message":"Welkom bij de GSNChat!", "timestamp":"", "groupId":"" },
+        
     ];
     var promise;
     var userStore; 

@@ -75,6 +75,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="dateHelper.js" />
     <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="scripts\loading-bar.min.js" />
     <Content Include="app\services\authInterceptorService.js" />

@@ -42,7 +42,8 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
 
         chat.client.broadcastMessage = function (name, message) {
-            var chatObject = { "user": name, "message": message, "timestamp": "14:00", "groupId": "" };
+          
+            var chatObject = { "user": name, "message": message, "timestamp": new Date().timeNow('hh:mm:ss'), "groupId": "" };
 
             //use apply to update view immediately
             $scope.$apply(function () {
