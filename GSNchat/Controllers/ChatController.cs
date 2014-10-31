@@ -40,6 +40,7 @@ namespace GSNchat.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [System.Web.Http.Authorize]
         [Route("sendmessage/pm/{groupID:long}")]
         [HttpPost]
         public async Task<IHttpActionResult> SendGroupMessage(ChatModel model)
@@ -56,7 +57,8 @@ namespace GSNchat.Controllers
         /// 
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>       
+        /// <returns></returns>    
+        [System.Web.Http.Authorize]
         [Route("joinchat/{groupID:long}")]
         [HttpPost]
         public async Task<IHttpActionResult> JoinGroup(ChatModel model)
@@ -72,6 +74,7 @@ namespace GSNchat.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>       
+        [System.Web.Http.Authorize]
         [Route("getConnections")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAllConnectedUsers()
