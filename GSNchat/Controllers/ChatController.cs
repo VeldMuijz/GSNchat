@@ -14,15 +14,17 @@ namespace GSNchat.Controllers
     /// <summary>
     /// 
     /// </summary>
+
+    
     [RoutePrefix("api/chat")]
     public class ChatController : ApiController
     {
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+    [System.Web.Http.Authorize]
         [Route("sendmessage")]
         [HttpPost]
         public async Task<IHttpActionResult> SendMessage(ChatModel model) {
