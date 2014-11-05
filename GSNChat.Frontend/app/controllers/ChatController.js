@@ -12,7 +12,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         $scope.userName = authService.authentication.userName;
         var chat = $.connection.chatHub;
         $.connection.hub.qs = 'user=' + $scope.userName;
-        $scope.backend = 'http://localhost:41021';
+        $scope.backend = 'http://devbackgsnchat.jeroenveldhuijzen.nl/';
         $.connection.hub.url = $scope.backend + '/signalr/hubs';
         $scope.message = '';
         $scope.chatStore = chatService.getStore();

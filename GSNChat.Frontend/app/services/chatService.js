@@ -16,7 +16,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
         sendMessage: function (name, message) {
 
             var request =
-            $http.post('http://localhost:41021/api/chat/sendmessage', { userName: name, message: message })
+            $http.post('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/sendmessage', { userName: name, message: message })
 
             return (request.then(handleSuccess, handleError));
 
@@ -33,7 +33,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
 
         getUsers: function () {
 
-             promise = $http.get('http://localhost:41021/api/chat/getconnections').
+            promise = $http.get('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/getconnections').
                 then(function (data, status, headers, config) {
                     console.log(data)
 
