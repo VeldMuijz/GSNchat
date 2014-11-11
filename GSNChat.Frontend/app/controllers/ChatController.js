@@ -9,7 +9,9 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         $location.path('/login');
 
     } else {
+
         $scope.userName = authService.authentication.userName;
+        $scope.connected = false;
         var chat = $.connection.chatHub;
         $.connection.hub.qs = 'user=' + $scope.userName;
         $scope.backend = 'http://devbackgsnchat.jeroenveldhuijzen.nl/';
@@ -60,15 +62,17 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         //Make connection to SignalR backend
         //Have to add jsonp = true for crossdomain requests
         $.connection.hub.start({ jsonp: true }).done(function () {
-
+            $scope.connected = true;
 
         });
 
         $.connection.hub.reconnecting(function () {
             alert("Trying to reconnect.");
+            $scope.connected = false;
         });
 
         $.connection.hub.disconnected(function () {
+            $scope.connected = false;
             if ($.connection.hub.lastError)
             { alert("Disconnected. Reason: " + $.connection.hub.lastError.message); }
         });
