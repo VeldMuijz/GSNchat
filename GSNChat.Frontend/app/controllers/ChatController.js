@@ -57,7 +57,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
             });
 
-            if (message.toLowerCase().indexOf($scope.userName) >= 0)
+            if (message.toLowerCase().indexOf($scope.userName.toLowerCase()) >= 0)
             {
                 show($scope.userName, message, '');
             }
