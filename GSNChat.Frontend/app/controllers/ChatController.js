@@ -64,6 +64,16 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
         });
 
+        $.connection.hub.reconnecting(function () {
+            alert("Trying to reconnect.");
+        });
+
+        $.connection.hub.disconnected(function () {
+            if ($.connection.hub.lastError)
+            { alert("Disconnected. Reason: " + $.connection.hub.lastError.message); }
+        });
+
+
     }
 
 
