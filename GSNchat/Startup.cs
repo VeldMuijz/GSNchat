@@ -26,6 +26,11 @@ namespace GSNchat
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
+
+            // Make long polling connections wait a maximum of 110 seconds for a
+            // response. When that time expires, trigger a timeout command and
+            // make the client reconnect.
+            GlobalHost.Configuration.ConnectionTimeout = TimeSpan.FromSeconds(30);
         }
 
         public void ConfigureOAuth(IAppBuilder app)
