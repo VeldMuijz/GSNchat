@@ -25,7 +25,6 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
         }
 
         chat.client.userLogin = function () {
-            //alert("User Logged in");
 
             chatService.getUsers().then(function (response) {
                 alert(angular.toJson(response.data));
@@ -37,7 +36,11 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
             }
 
         chat.client.userLogOff = function (){
-        
+            chatService.getUsers().then(function (response) {
+                alert(angular.toJson(response.data));
+                $scope.userStore = response.data;
+                console.log($scope.userStore[0].name)
+            });
         }
 
 
