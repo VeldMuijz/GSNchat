@@ -5,7 +5,12 @@
         <div class="panel panel-default col-sm-10">
             <!-- TODO: Create chatbox per user -->
             <div class="panel-heading nav">
-                <div class="navbar-brand"><span data-ng-show="connected" class="glyphicon glyphicon-check"><span data-ng-hide="connected" class="glyphicon glyphicon-unchecked"></span>ChatBox</div><input class="form-control navbar-right" ng-model="search" placeholder="Filter op user..." />
+                <div class="navbar-brand">
+                    <span data-ng-show="connected" class="glyphicon glyphicon-check">
+                    <span data-ng-hide="connected" class="glyphicon glyphicon-unchecked"></span>
+                    ChatBox
+                </div>
+                <input class="form-control navbar-right" ng-model="search" placeholder="Filter op user..." />
             </div>
             <!-- Chatmessages -->
             <!-- TODO: Add a loading item when connection to hub -->

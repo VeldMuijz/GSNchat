@@ -57,6 +57,11 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
             });
 
+            if (message.toLowerCase().indexOf($scope.userName) >= 0)
+            {
+                show($scope.userName, message, '');
+            }
+            
         };
 
         //Make connection to SignalR backend
@@ -80,5 +85,40 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
     }
 
+
+    //Notifications for direct messages
+    //source: https://developer.cdn.mozilla.net/media/uploads/demos/e/l/elfoxero/c17223c414d8ddafb7808972b5617d9e/html5-notifications_1400214081_demo_package/index.html
+
+	$scope.Notification = window.Notification || window.mozNotification || window.webkitNotification;
+
+    Notification.requestPermission(function (permission) {
+        // console.log(permission);
+    });
+
+    function show(username, message, icon) {
+        
+        var instance = new $scope.Notification(
+			username, {
+			    body: message,
+			    icon: icon
+
+			}
+		);
+
+        instance.onclick = function () {
+            // Something to do
+        };
+        instance.onerror = function () {
+            // Something to do
+        };
+        instance.onshow = function () {
+            // Something to do
+        };
+        instance.onclose = function () {
+            // Something to do
+        };
+
+        return false;
+    }
 
 }]);
