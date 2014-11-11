@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('chatController', ['$scope', '$location', 'chatService', 'authService', function ($scope, $location, chatService, authService) {
+app.controller('chatController', ['$scope','$window', '$location', 'chatService', 'authService', function ($scope, $window, $location, chatService, authService) {
 
     
 
@@ -107,6 +107,7 @@ app.controller('chatController', ['$scope', '$location', 'chatService', 'authSer
 
         instance.onclick = function () {
             // Something to do
+            $window.focus();
         };
         instance.onerror = function () {
             // Something to do
