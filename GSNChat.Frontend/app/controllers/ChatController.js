@@ -18,7 +18,14 @@ app.controller('chatController', ['$scope','$window', '$location', 'chatService'
         $.connection.hub.url = $scope.backend + '/signalr/hubs';
         $scope.message = '';
         $scope.chatStore = chatService.getStore();
-        $scope.userStore;
+        $scope.userStore;             
+        $scope.audio = new Audio('../../Content/sounds/receive.wav');
+
+
+        $scope.playsound = function () {
+           $scope.audio.play();
+        }
+        
 
         $scope.sendMessage = function () {
             chatService.sendMessage($scope.userName, $('#chatmessage').val());
@@ -60,7 +67,11 @@ app.controller('chatController', ['$scope','$window', '$location', 'chatService'
             if (message.toLowerCase().indexOf($scope.userName.toLowerCase()) >= 0)
             {
                 show($scope.userName, message, '');
+            }            
+            if ($scope.userName !== name) {
+                $scope.playsound();
             }
+            
             
         };
 
@@ -121,5 +132,7 @@ app.controller('chatController', ['$scope','$window', '$location', 'chatService'
 
         return false;
     }
+
+    
 
 }]);
