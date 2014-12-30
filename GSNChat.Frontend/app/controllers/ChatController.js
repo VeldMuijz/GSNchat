@@ -106,10 +106,19 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
 
             //use apply to update view immediately
             $scope.$apply(function () {
-                chatService.storePM(chatObject);
+                //chatService.storePM(chatObject);
+                if (chatObject.user === $scope.userName) {
+                    //send pm to someone else
+                    chatService.storePMSent(chatObject);
+                } else {
+                    //received pm from someone
+                    chatService.storePMReceived(chatObject);
+
+                }
                 $scope.pmStore = chatService.getPMStore();
 
             });
+            
             alert(angular.toJson($scope.pmStore))
             if (message.toLowerCase().indexOf($scope.userName.toLowerCase()) >= 0) {
                 show($scope.userName, message, '');
