@@ -7,30 +7,51 @@
             <div class="panel-heading nav">
                 <div class="navbar-brand">
                     <span data-ng-show="connected" class="glyphicon glyphicon-check">
-                    <span data-ng-hide="connected" class="glyphicon glyphicon-unchecked"></span>
-                    ChatBox
+                        <span data-ng-hide="connected" class="glyphicon glyphicon-unchecked"></span>
+                        ChatBox {{receiver}}
                 </div>
                 <input class="form-control navbar-right" ng-model="search" placeholder="Filter op user..." />
             </div>
             <!-- Chatmessages -->
             <!-- TODO: Add a loading item when connection to hub -->
-            <div id="chatboxfeed" class="panel-body">
-                <div class="row" ng-repeat="chatmessage in chatStore | filter:search">
-                    <div class="col-sm-2 ">{{chatmessage.user}}</div>
-                    <div class="col-sm-8 ">{{chatmessage.message}}</div>
-                    <div class="col-sm-2 right ">{{chatmessage.timestamp}}</div>
+            <div ng-show="showChatbox">
+                <div id="chatboxfeed" class="panel-body">
+                    <div class="row" ng-repeat="chatmessage in chatStore | filter:search">
+                        <div class="col-sm-2 ">{{chatmessage.user}}</div>
+                        <div class="col-sm-8 ">{{chatmessage.message}}</div>
+                        <div class="col-sm-2 right ">{{chatmessage.timestamp}}</div>
+                    </div>
                 </div>
+                <!-- Chatmessages end -->
+                <!-- Chat input -->
+                <div class="panel-footer input-group  col-sm-12">
+                    <span id="sendmessage" class="input-group-addon" ng-click="sendMessage()">Send</span>
+                    <textarea id="chatmessage" class="form-control" placeholder="Type je bericht hier...."></textarea>
+                </div>
+                <!-- Chat input -->
             </div>
-            <!-- Chatmessages end -->
+            <div ng-hide="showChatbox">
+                <!-- Chatmessages -->
+                <!-- TODO: Add a loading item when connection to hub -->
+                <div id="pmfeed" class="panel-body" ng-hide="showChatbox">
+                    <div class="row" ng-repeat="chatmessage in pmStore | filter:search">
+                        <div class="col-sm-2 ">{{chatmessage.user}}</div>
+                        <div class="col-sm-8 ">{{chatmessage.message}}</div>
+                        <div class="col-sm-2 right ">{{chatmessage.timestamp}}</div>
+                    </div>
+                </div>
+                <!-- Chatmessages end -->
+                <!-- Chat input -->
+                <div class="panel-footer input-group  col-sm-12">
+                    <span id="sendmessage" class="input-group-addon" ng-click="sendPrivateMessage()">Send</span>
+                    <textarea id="chatprivatemessage" class="form-control" placeholder="Type je bericht hier...."></textarea>
+                </div>
+                <!-- Chat input -->
+            </div>
             <div data-ng-hide="message === '' " class="alert alert-danger">
                 {{message}}
             </div>
-            <!-- Chat input -->
-            <div class="panel-footer input-group  col-sm-12">
-                <span id="sendmessage" class="input-group-addon" ng-click="sendMessage()">Send</span>
-                <textarea id="chatmessage" class="form-control" placeholder="Type je bericht hier...."></textarea>
-            </div>
-            <!-- Chat input -->
+
         </div>
 
 
@@ -38,9 +59,9 @@
         <!-- Side menu for users -->
         <div class="col-sm-2 sidebar col-sm-offset-10">
             <div class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#">Chatbox</a></li>
+                <li class="active" ng-click="setReceiver('')"><a>Chatbox</a></li>
                 <li ng-repeat="user in userStore">
-                    <a href="#">{{user.name}} <span class="badge pull-right"></span></a>
+                    <a ng-click="setReceiver(user.name);">{{user.name}} <span class="badge pull-right"></span></a>
                 </li>
             </div>
 

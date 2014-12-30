@@ -65,6 +65,7 @@
     <Content Include="app\services\chatService.js" />
     <Content Include="app\views\chatbox.html" />
     <Content Include="app\views\orders.html" />
+    <Content Include="app\views\privateChat.html" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />

@@ -14,11 +14,16 @@ namespace GSNchat.Controllers
     /// <summary>
     /// 
     /// </summary>
+    /// 
 
+   
     
     [RoutePrefix("api/chat")]
     public class ChatController : ApiController
     {
+        IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+        
+        
         /// <summary>
         /// 
         /// </summary>
@@ -29,7 +34,7 @@ namespace GSNchat.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SendMessage(ChatModel model) {
 
-           var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+          // var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
            await hubContext.Clients.All.broadcastMessage(model.UserName, model.Message);
              
              return Ok();
@@ -40,13 +45,17 @@ namespace GSNchat.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [System.Web.Http.Authorize]
-        [Route("sendmessage/pm/{groupID:long}")]
+       // [System.Web.Http.Authorize]
+        [Route("sendmessage/pm/{receiver}")]
         [HttpPost]
-        public async Task<IHttpActionResult> SendGroupMessage(ChatModel model)
+        public async Task<IHttpActionResult> SendPrivateMessage(ChatModel model, string receiver)
         {
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
-            await hubContext.Clients.All.broadcastMessage(model.UserName, model.Message);
+
+            if (ModelState.IsValid) {
+
+                await hubContext.Clients.Clients(model.Receivers).sendPrivateMessage(model.UserName, model.Message, receiver);
+                
+            }
 
             return Ok();
         }
@@ -58,15 +67,14 @@ namespace GSNchat.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>    
-        [System.Web.Http.Authorize]
-        [Route("joinchat/{groupID:long}")]
+        [Route("joingroup/{name}")]
         [HttpPost]
-        public async Task<IHttpActionResult> JoinGroup(ChatModel model)
+        public async Task<IHttpActionResult> JoinGroup(string name, string connectionID)
         {
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
-            await hubContext.Clients.All.broadcastMessage(model.UserName, model.Message);
+            await hubContext.Groups.Add(connectionID, name);
 
-            return Ok();
+            return Ok(hubContext.Groups.ToString());
+
         }
 
         /// <summary>

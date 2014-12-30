@@ -14,7 +14,8 @@ namespace GSNchat.Models
         public string UserName { get; set; }
         [Required]
         public string Message { get; set; }
-        public long GroupID { get; set; }
+        public List<string> Receivers { get; set; }
+
 
     }
 }

@@ -2,10 +2,16 @@
 app.factory('chatService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
     var chatStore = [
-        { "user":"System", "message":"Welkom bij de GSNChat!", "timestamp":"", "groupId":"" },
+        { "user":"System", "message":"Welkom bij de GSNChat!", "timestamp":"", "groupId":"" }
         
     ];
+    var pmStore = [];
+    //{ "groupid":"123456","chat":{ 
+    //                              "user":"username1", "message":"Hello username1", "timestamp":"", "groupId":"123456" },
+    //                              "user":"username2", "message":"Hi there username2", "timestamp":"", "groupId":"123456" }
+    //}
     var promise;
+
     var userStore; 
         //{ "name": "testuser", "connectionId": "123456" },
         //{ "name": "Klei", "connectionId": "123456" }
@@ -21,16 +27,34 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
             return (request.then(handleSuccess, handleError));
 
         },
+        sendPrivateMessage: function (name, message, receiver, connectionIds) {
+
+            var json = { userName: name, message: message, receivers: [] };
+            json.receivers = connectionIds;
+                        
+            var request = $http.post('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/sendmessage/pm/' + receiver, json);
+           
+            return (request.then(handleSuccess, handleError));
+
+        },
         storeMessage: function (chat) {
             //E.g.: { "user": "Test1", "message": "message Content", "timestamp": "14:00", "groupId": "" }
             chatStore.push(chat);
+            return true;
+        },
+        storePM: function (chat) {
+            pmStore.push(chat);
+
             return true;
         },
         getStore: function () {
             
             return angular.fromJson(chatStore);
         },
-
+        getPMStore: function () {
+            
+            return angular.fromJson(pmStore);
+        },
         getUsers: function () {
 
             promise = $http.get('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/getconnections').
