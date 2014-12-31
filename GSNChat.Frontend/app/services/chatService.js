@@ -2,8 +2,8 @@
 app.factory('chatService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
     var chatStore = [
-        { "user":"System", "message":"Welkom bij de GSNChat!", "timestamp":"", "groupId":"" }
-        
+        { "user": "System", "message": "Welkom bij de GSNChat!", "timestamp": "", "groupId": "" }
+
     ];
     var pmStore = [];
     //[ "user":"username1",chat:[ 
@@ -15,7 +15,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
     //]
     var promise;
 
-    var userStore; 
+    var userStore;
     //{ "name": "testuser", "connectionId": "123456" },
     //{ "name": "Klei", "connectionId": "123456" }
 
@@ -34,9 +34,9 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
 
             var json = { userName: name, message: message, receivers: [] };
             json.receivers = connectionIds;
-                        
+
             var request = $http.post('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/sendmessage/pm/' + receiver, json);
-           
+
             return (request.then(handleSuccess, handleError));
 
         },
@@ -46,21 +46,37 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
             return true;
         },
         storePMReceived: function (chat) {
-            pmStore[chat.user].push(chat);
-            pmStore[chat.user].push(chat);
-            //pmStore.push(chat);
-            alert("chat received \n" + angular.toJson(pmStore));
-            return true;
-        },
-        storePMSent: function (chat) {
-            var user = chat.user;
             var key = null;
+
             if (pmStore.length < 1) {
                 pmStore.push({ user: chat.user, chat: [chat] });
 
-            } else{
-                $.each(pmStore, function(index, value){
-                    if(value.user === chat.user){
+            } else {
+                $.each(pmStore, function (index, value) {
+                    if (value.user === chat.receiver) {
+                        key = index;
+                        value.chat.push(chat);
+
+                        return false;
+                    }
+                });
+                if (key == null) {
+                    pmStore.push({ user: chat.receiver, chat: chat });
+                }
+
+            }
+            console.log("chat received \n" + angular.toJson(pmStore));
+            return true;
+        },
+        storePMSent: function (chat) {
+            var key = null;
+
+            if (pmStore.length < 1) {
+                pmStore.push({ user: chat.user, chat: [chat] });
+
+            } else {
+                $.each(pmStore, function (index, value) {
+                    if (value.user === chat.user) {
                         key = index;
                         value.chat.push(chat);
 
@@ -70,70 +86,70 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
                 if (key == null) {
                     pmStore.push({ user: chat.user, chat: chat });
                 }
-                
+
             }
-            alert("chat sent \n" + angular.toJson(pmStore));
-    return true;
-},
-    getStore: function () {
-            
-        return angular.fromJson(chatStore);
-    },
-getPMStore: function () {
-            
-    return angular.fromJson(pmStore);
-},
-getUsers: function () {
 
-    promise = $http.get('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/getconnections').
-        then(function (data, status, headers, config) {
-            console.log(data)
+            return true;
+        },
+        getStore: function () {
 
-            return data;
+            return angular.fromJson(chatStore);
+        },
+        getPMStore: function () {
 
-        });
-            
-    return promise;
-            
-},
-addUser: function (user) {
+            return angular.fromJson(pmStore);
+        },
+        getUsers: function () {
 
-    userStore.push(user);
+            promise = $http.get('http://devbackgsnchat.jeroenveldhuijzen.nl/api/chat/getconnections').
+                then(function (data, status, headers, config) {
+                    console.log(data)
 
-}        
+                    return data;
 
-}
+                });
 
+            return promise;
 
-// Transform the error response, unwrapping the application data from
-// the API response payload.
-function handleError(response) {
+        },
+        addUser: function (user) {
 
-    // The API response from the server should be returned in a
-    // nomralized format. However, if the request was not handled by the
-    // server (or what not handles properly - ex. server error), then we
-    // may have to normalize it on our end, as best we can.
-    if (
-        !angular.isObject(response.data) ||
-        !response.data.message
-        ) {
+            userStore.push(user);
 
-        return ($q.reject("An unknown error occurred."));
+        }
 
     }
 
-    // Otherwise, use expected error message.
-    return ($q.reject(response.data.message));
 
-}
+    // Transform the error response, unwrapping the application data from
+    // the API response payload.
+    function handleError(response) {
+
+        // The API response from the server should be returned in a
+        // nomralized format. However, if the request was not handled by the
+        // server (or what not handles properly - ex. server error), then we
+        // may have to normalize it on our end, as best we can.
+        if (
+            !angular.isObject(response.data) ||
+            !response.data.message
+            ) {
+
+            return ($q.reject("An unknown error occurred."));
+
+        }
+
+        // Otherwise, use expected error message.
+        return ($q.reject(response.data.message));
+
+    }
 
 
-// Transform the successful response, unwrapping the application data
-// from the API response payload.
-function handleSuccess(response) {
+    // Transform the successful response, unwrapping the application data
+    // from the API response payload.
+    function handleSuccess(response) {
 
-    return true;
+        return true;
 
-}
+    }
 
 }]);
