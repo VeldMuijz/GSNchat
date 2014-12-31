@@ -67,19 +67,13 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
         chat.client.userLogin = function () {
 
             chatService.getUsers().then(function (response) {
-                alert(angular.toJson(response.data));
                 $scope.userStore = response.data;
-                console.log($scope.userStore[0].name)
             });
-
-
         }
 
         chat.client.userLogOff = function () {
             chatService.getUsers().then(function (response) {
-                alert(angular.toJson(response.data));
                 $scope.userStore = response.data;
-                console.log($scope.userStore[0].name)
             });
         }
 
@@ -96,7 +90,7 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
             });
 
             if (message.toLowerCase().indexOf($scope.userName.toLowerCase()) >= 0) {
-                show($scope.userName, message, '');
+                showNotification($scope.userName, message, '');
             }
         };
 
@@ -108,28 +102,21 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
             $scope.$apply(function () {
                 //chatService.storePM(chatObject);
                 if (chatObject.user === $scope.userName) {
-                    //send pm to someone else
+                    //send pm to someone
                     chatService.storePMSent(chatObject);
                 } else {
                     //received pm from someone
                     chatService.storePMReceived(chatObject);
-
                 }
                 $scope.pmStore = chatService.getPMStore();
-
             });
-            
-            alert(angular.toJson($scope.pmStore))
-            if (message.toLowerCase().indexOf($scope.userName.toLowerCase()) >= 0) {
-                show($scope.userName, message, '');
-            }
+            showNotification($scope.userName, message, '');
         };
 
         //Make connection to SignalR backend
         //Have to add jsonp = true for crossdomain requests
         $.connection.hub.start({ jsonp: true }).done(function () {
             $scope.connected = true;
-
         });
 
         $.connection.hub.reconnecting(function () {
@@ -142,27 +129,22 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
             if ($.connection.hub.lastError)
             { alert("Disconnected. Reason: " + $.connection.hub.lastError.message); }
         });
-
-
     }
 
 
     //Notifications for direct messages
     //source: https://developer.cdn.mozilla.net/media/uploads/demos/e/l/elfoxero/c17223c414d8ddafb7808972b5617d9e/html5-notifications_1400214081_demo_package/index.html
-
     $scope.Notification = window.Notification || window.mozNotification || window.webkitNotification;
 
     Notification.requestPermission(function (permission) {
-        // console.log(permission);
     });
 
-    function show(username, message, icon) {
+    function showNotification(username, message, icon) {
 
         var instance = new $scope.Notification(
 			username, {
 			    body: message,
 			    icon: icon
-
 			}
 		);
 
