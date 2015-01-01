@@ -90,7 +90,7 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
             });
 
             if (message.toLowerCase().indexOf($scope.userName.toLowerCase()) >= 0) {
-                showNotification($scope.userName, message, '');
+                showNotification(name, message, '');
             }
         };
 
@@ -110,7 +110,9 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
                 }
                 $scope.pmStore = chatService.getPMStore();
             });
-            showNotification($scope.userName, message, '');
+            if (name.toLowerCase() !== $scope.userName.toLowerCase()) {
+                showNotification(name, message, '');
+            }
         };
 
         //Make connection to SignalR backend
