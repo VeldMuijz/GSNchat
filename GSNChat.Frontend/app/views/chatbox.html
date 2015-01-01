@@ -34,11 +34,11 @@
                 <!-- Chatmessages -->
                 <!-- TODO: Add a loading item when connection to hub -->
                 <div id="pmfeed" class="panel-body" ng-hide="showChatbox">
-                    <div class="row" ng-repeat="user in pmStore | filter:receiver">
-                        <div ng-repeat="chat in user.chat">
-                            <div class="col-sm-2 ">{{chat.user}}</div>
-                            <div class="col-sm-8 ">{{chat.message}}</div>
-                            <div class="col-sm-2 right ">{{chat.timestamp}}</div>
+                    <div class="row" ng-repeat="pmuser in pmStore | filter:receiver">
+                        <div ng-repeat="pm in pmuser.chat">
+                            <div class="col-sm-2 ">{{pm.user}}</div>
+                            <div class="col-sm-8 ">{{pm.message}}</div>
+                            <div class="col-sm-2 right ">{{pm.timestamp}}</div>
                         </div>
                         
                     </div>
@@ -64,10 +64,10 @@
             <div class="nav nav-pills nav-stacked">
                 <li class="active" ng-click="setReceiver('')"><a>Chatbox</a></li>
                 <li ng-repeat="user in userStore">
-                    <a ng-click="setReceiver(user.name);">{{user.name}} <span class="badge pull-right"></span></a>
+                    <a ng-click="setReceiver(user.name);">{{user.name}} <span class="badge pull-right" data-ng-hide="((pmStore|filter:user.name).length) < 1">{{((pmStore|filter:user.name).chat|filter:true).length}}</span></a>
                 </li>
             </div>
-
+            Online: {{userStore.length}}
         </div>
         <!-- End Side menu for users -->
 

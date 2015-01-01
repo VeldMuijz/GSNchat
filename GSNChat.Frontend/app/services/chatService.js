@@ -7,11 +7,11 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
     ];
     var pmStore = [];
     //[ "user":"username1",chat:[ 
-    //                              "user":"username1", "message":"Hello username1", "timestamp":"", "receiver":"username2" },
-    //                              "user":"username2", "message":"Hi there username2", "timestamp":"", "receiver":"username1" }],
+    //                              "user":"username1", "message":"Hello username1", "timestamp":"", "receiver":"username2", "read":"false" },
+    //                              "user":"username2", "message":"Hi there username2", "timestamp":"", "receiver":"username1", "read":"false" }],
     //  "user":"username3","chat":[ 
-    //                              "user":"username3", "message":"Hello username1", "timestamp":"", "receiver":"username4" },
-    //                              "user":"username4", "message":"Hi there username2", "timestamp":"", "receiver":"username3" }]
+    //                              "user":"username3", "message":"Hello username1", "timestamp":"", "receiver":"username4", "read":"false" },
+    //                              "user":"username4", "message":"Hi there username2", "timestamp":"", "receiver":"username3", "read":"false" }]
     //]
     var promise;
 
@@ -40,51 +40,59 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
             return (request.then(handleSuccess, handleError));
 
         },
-        storeMessage: function (chat) {
+        storeMessage: function (chatmessage) {
             //E.g.: { "user": "Test1", "message": "message Content", "timestamp": "14:00", "groupId": "" }
             chatStore.push(chat);
             return true;
         },
-        storePMReceived: function (chat) {
+        storePMReceived: function (chatmessage) {
             var key = null;
-
-            if (pmStore.length < 1) {
-                pmStore.push({ user: chat.user, chat: [chat] });
+           
+            
+            if (pmStore.length == 0) {
+                var pm = { user: chatmessage.user, chat: [] }
+                pm.chat.push(chatmessage)
+                pmStore.push(pm);
 
             } else {
                 $.each(pmStore, function (index, value) {
-                    if (value.user === chat.receiver) {
+                    if (value.user.toLowerCase() === chatmessage.user.toLowerCase()) {
                         key = index;
-                        value.chat.push(chat);
+                        chatmessage.read = false;
+                        value.chat.push(chatmessage);
 
                         return false;
                     }
                 });
                 if (key == null) {
-                    pmStore.push({ user: chat.receiver, chat: chat });
+                    pmStore.push({ user: chatmessage.receiver, chat: chatmessage });
                 }
 
             }
             console.log("chat received \n" + angular.toJson(pmStore));
             return true;
         },
-        storePMSent: function (chat) {
+        storePMSent: function (chatmessage) {
             var key = null;
+            
 
-            if (pmStore.length < 1) {
-                pmStore.push({ user: chat.user, chat: [chat] });
+            if (pmStore.length == 0) {
+                var pm = { user: chatmessage.user, chat: [] }
+                pm.chat.push(chatmessage)
+                pmStore.push(pm);
 
             } else {
                 $.each(pmStore, function (index, value) {
-                    if (value.user === chat.user) {
+                    if (value.user.toLowerCase() === chatmessage.receiver.toLowerCase()) {
                         key = index;
-                        value.chat.push(chat);
+                        chatmessage.read = true;
+                        value.chat.push(chatmessage);
 
                         return false;
                     }
                 });
                 if (key == null) {
-                    pmStore.push({ user: chat.user, chat: chat });
+                    pmStore.push({ user: chatmessage.user, chat: chatmessage });
                 }
 
             }

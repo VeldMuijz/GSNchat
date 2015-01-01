@@ -96,7 +96,7 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
 
         chat.client.sendPrivateMessage = function (name, message, receiver) {
 
-            var chatObject = { "user": name, "message": message, "timestamp": new Date().timeNow('hh:mm:ss'), "receiver": receiver };
+            var chatObject = { "user": name, "message": message, "timestamp": new Date().timeNow('hh:mm:ss'), "receiver": receiver, "read":false };
 
             //use apply to update view immediately
             $scope.$apply(function () {
