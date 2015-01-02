@@ -1,8 +1,6 @@
 ﻿'use strict';
 app.controller('chatController', ['$scope', '$window', '$location', 'chatService', 'authService', function ($scope, $window, $location, chatService, authService) {
 
-
-
     if (!authService.authentication.isAuth) {
         //no authenticated or not longer authenticated
         alert("U bent niet (langer) aangemeld.")
