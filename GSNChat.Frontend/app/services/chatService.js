@@ -42,7 +42,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
         },
         storeMessage: function (chatmessage) {
             //E.g.: { "user": "Test1", "message": "message Content", "timestamp": "14:00", "groupId": "" }
-            chatStore.push(chat);
+            chatStore.push(chatmessage);
             return true;
         },
         storePMReceived: function (chatmessage) {
@@ -77,7 +77,7 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
             
 
             if (pmStore.length == 0) {
-                var pm = { user: chatmessage.user, chat: [] }
+                var pm = { user: chatmessage.receiver, chat: [] }
                 pm.chat.push(chatmessage)
                 pmStore.push(pm);
 
