@@ -59,13 +59,17 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Chat.js" />
+    <Content Include="app\controllers\accountController.js" />
     <Content Include="app\controllers\chatController.js" />
+    <Content Include="app\services\accountService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\controllers\ordersController.js" />
     <Content Include="app\services\chatService.js" />
+    <Content Include="app\views\accounts.html" />
     <Content Include="app\views\chatbox.html" />
     <Content Include="app\views\orders.html" />
     <Content Include="app\views\privateChat.html" />
+    <Content Include="Content\scripts\bootstrap.min.js" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -77,9 +81,9 @@
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="dateHelper.js" />
-    <Content Include="scripts\angular-local-storage.min.js" />
-    <Content Include="scripts\loading-bar.min.js" />
+    <Content Include="Content\scripts\dateHelper.js" />
+    <Content Include="Content\scripts\angular-local-storage.min.js" />
+    <Content Include="Content\scripts\loading-bar.min.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\ordersService.js" />
     <Content Include="app\controllers\signupController.js" />
