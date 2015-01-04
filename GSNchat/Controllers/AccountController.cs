@@ -1,7 +1,7 @@
 ﻿using GSNchat.Models;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
-using Orchestrate.Net;
+using Orchestrate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace GSNchat.Controllers
     public class AccountController : ApiController
     {
      //private AuthRepository _repo = null;
- 
+    Orchestrate.Net.Orchestrate orchestrate = new Orchestrate.Net.Orchestrate("0b42c04c-0d70-4da8-a3c1-2036882369d0");
         public AccountController()
         {
             //_repo = new AuthRepository();
@@ -38,14 +38,10 @@ namespace GSNchat.Controllers
             if (userModel.ConfirmPassword.Equals(userModel.Password)) {
                 var hashpw = Crypto.HashPassword(userModel.Password);
                // var hasheml = Crypto.Hash(userModel.Email);
-                
-               
                 userModel.Password = hashpw;
-                userModel.ConfirmPassword = hashpw;
-               
-                
+                userModel.ConfirmPassword = hashpw;  
             }
-            var orchestrate = new Orchestrate.Net.Orchestrate("0b42c04c-0d70-4da8-a3c1-2036882369d0");
+            
 
            var result = orchestrate.Put("users",userModel.UserName, JsonConvert.SerializeObject(userModel));
  
@@ -97,6 +93,54 @@ namespace GSNchat.Controllers
  
             return null;
         }
+
+        // PUT api/Account
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<IHttpActionResult> PutUser(UserModel userModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (userModel.ConfirmPassword.Equals(userModel.Password))
+            {
+                var hashpw = Crypto.HashPassword(userModel.Password);
+                // var hasheml = Crypto.Hash(userModel.Email);
+                userModel.Password = hashpw;
+                userModel.ConfirmPassword = hashpw;
+            }
+
+
+            var result = orchestrate.Put("users", userModel.UserName, JsonConvert.SerializeObject(userModel));
+
+            ////IHttpActionResult errorResult = GetErrorResult(result);
+
+            //if (result.Score != 1)
+            //{
+            //    return (IHttpActionResult) result.Value;
+            //}
+
+            return Ok(result.ToString());
+        }
+
+
+        // DELETE: api/account/5
+        public IHttpActionResult Delete(string username)
+        {
+            return Ok(orchestrate.Delete("users", username,true));
+        }
+
+        // GET: api/account/username
+    [HttpGet]    
+    public Object GetUsers()
+        {
+          
+            return orchestrate.List("users", 100, null, null); 
+        }
+
     }
  
 }
