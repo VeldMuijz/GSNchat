@@ -22,8 +22,11 @@ namespace GSNchat.Controllers
     public class ChatController : ApiController
     {
         IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+        UserModel[] userlist = new UserModel[] {
+            new UserModel {UserName="VeldMuijz", Role="admin", Email="jeroen@jeorenveldhuijzen.nl", FirstName = "jeroen", LastName = "veldhuijzen", Password = "12313",ConfirmPassword = "12313",}
         
-        
+        };
+
         /// <summary>
         /// 
         /// </summary>
