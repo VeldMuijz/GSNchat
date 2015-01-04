@@ -1,58 +1,69 @@
 ﻿<div class="container">
-    <form ng-repeat="user in userStore" class="form-login" role="form">
-        <h2 class="form-login-heading">{{user.value.UserName}}</h2>
-        <input type="text" class="form-control" placeholder="Username" value="{{user.value.UserName}}" required autofocus>
-        <input type="text" class="form-control" placeholder="FirstName" value="{{user.value.FirstName}}" required>
-        <input type="text" class="form-control" placeholder="LastName" value="{{user.value.LastName}}" required>
-        <input type="text" class="form-control" placeholder="Email" value="{{user.value.Email}}" required>
-        <input type="password" class="form-control" placeholder="Password" value="{{user.value.Password}}" required>
-        <input type="password" class="form-control" placeholder="Confirm Password" value="{{user.value.ConfirmPassword}}" required>
+    <!--<div class="input-group">
+        <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1"></span>
+        <input type="text" class="form-control" placeholder="Username" ng-model="search.value.UserName" value="selectedUser" aria-describedby="basic-addon1">
+    </div>-->
+    <div class="input-group">
+        <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1"></span>
+        <input type="text" class="form-control" placeholder="Username" ng-model="selectedUser.value.UserName" aria-describedby="basic-addon1">
+    </div>
+    <div ng-hide="selectedUser.value.UserName.length < 1">
+        <form ng-repeat="user in userStore | filter: selectedUser" class=" form-login" role="form">
+            <h2 class="form-login-heading">{{user.value.UserName}}</h2>
+            <input type="text" class="form-control" placeholder="Username" ng-model="user.value.UserName" required autofocus>
+            <input type="text" class="form-control" placeholder="FirstName" ng-model="user.value.FirstName" required>
+            <input type="text" class="form-control" placeholder="LastName" ng-model="user.value.LastName" required>
+            <input type="text" class="form-control" placeholder="Email" ng-model="user.value.Email" required>
+            <input type="password" class="form-control" placeholder="Password" ng-model="user.value.Password" required>
+            <input type="password" class="form-control" placeholder="Confirm Password" ng-model="user.value.ConfirmPassword" required>
 
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{user.value.Role}} <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a>User</a></li>
-                <li><a>Admin</a></li>
-            </ul>
-        </div>
-        <br />
-        <br />
-        <button class="btn btn-lg btn-info" type="submit" data-ng-click="updateUser()">Update</button>
-        <button class="btn btn-lg btn-danger" type="submit" data-ng-click="removeUser()">Remove</button>
-        <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-            {{message}}
-        </div>
-    </form>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{user.value.Role}} <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a>User</a></li>
+                    <li><a>Admin</a></li>
+                </ul>
+            </div>
+            <br />
+            <br />
+            <button class="btn btn-lg btn-info" type="submit" data-ng-click="updateUser(user.value)">Update</button>
+            <button class="btn btn-lg btn-danger" type="submit" data-ng-click="removeUser()">Remove</button>
+            <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                {{message}}
+            </div>
+        </form>
+    </div>
+    <div ng-hide="selectedUser.value.UserName !==''">
+        <form class="form-login" role="form">
+            <h2 class="form-login-heading">Create new User</h2>
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="account.userName" required autofocus>
+            <input type="text" class="form-control" placeholder="FirstName" data-ng-model="account.firstName" required>
+            <input type="text" class="form-control" placeholder="LastName" data-ng-model="account.lastName" required>
+            <input type="text" class="form-control" placeholder="Email" data-ng-model="account.email" required>
+            <input type="password" class="form-control" placeholder="Password" data-ng-model="account.password" required>
+            <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="account.confirmPassword" required>
 
-    <form class="form-login" role="form">
-        <h2 class="form-login-heading">Create new User</h2>
-        <input type="text" class="form-control" placeholder="Username" data-ng-model="account.userName" required autofocus>
-        <input type="text" class="form-control" placeholder="FirstName" data-ng-model="account.firstName" required>
-        <input type="text" class="form-control" placeholder="LastName" data-ng-model="account.lastName" required>
-        <input type="text" class="form-control" placeholder="Email" data-ng-model="account.email" required>
-        <input type="password" class="form-control" placeholder="Password" data-ng-model="account.password" required>
-        <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="account.confirmPassword" required>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{account.role}} <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a>User</a></li>
+                    <li><a>Admin</a></li>
+                </ul>
+            </div>
 
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{account.role}} <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a>User</a></li>
-                <li><a>Admin</a></li>
-            </ul>
-        </div>
-
-        <button class="btn btn-lg btn-info" type="submit" data-ng-click="createUser()">Create</button>
-        <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-            {{message}}
-        </div>
-    </form>
+            <button class="btn btn-lg btn-info" type="submit" data-ng-click="createUser()">Create</button>
+            <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                {{message}}
+            </div>
+        </form>
+    </div>
 
     <!-- Side menu for users -->
     <div class="col-sm-2 sidebar col-sm-offset-10">
         <div class="nav nav-pills nav-stacked">
             <li class="active" ng-click="setReceiver('')"><a>Chatbox</a></li>
             <li ng-repeat="user in userStore">
-                <a ng-click="setReceiver(user.name);">{{user.value.UserName}}</a>
+                <a ng-click="setSelectedUser(user.value.UserName);">{{user.value.UserName}}</a>
             </li>
         </div>
         

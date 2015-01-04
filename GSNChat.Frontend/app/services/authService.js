@@ -1,12 +1,12 @@
 ﻿'use strict';
 app.factory('authService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
-    var serviceBase = 'http://devbackgsnchat.jeroenveldhuijzen.nl/api/account/';
+    var serviceBase = 'http://devbackgsnchat.jeroenveldhuijzen.nl/';
     var authServiceFactory = {};
     var userStore = [];
 
     var _getUsers = function () {
-        return $http.get(serviceBase + 'getusers').then(function (response) {
+        return $http.get(serviceBase + 'api/account/getusers').then(function (response) {
                 console.log(response.data.results);
                 userStore = response.data.results;
                 
@@ -24,7 +24,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
         _logOut();
 
-        return $http.post(serviceBase + 'register', registration).then(function (response) {
+        return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
             return response;
         });
 
@@ -32,14 +32,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
     var _updateUser = function (account) {
 
-        return $http.put(serviceBase, account).then(function (response) {
+        return $http.put('http://localhost:41021/' + 'api/account/', account).then(function (response) {
             return response;
         });
     }
 
     var _removeUser = function (account) {
 
-        return $http.delete(serviceBase, account).then(function (response) {
+        return $http.delete(serviceBase + 'api/account/', account).then(function (response) {
             return response;
         });
     }

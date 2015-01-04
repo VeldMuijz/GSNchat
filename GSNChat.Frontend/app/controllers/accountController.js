@@ -4,6 +4,9 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
     $scope.savedSuccessfully = false;
     $scope.message = "";
     $scope.userStore;
+    $scope.selectedUser = {};
+    $scope.selectedUser.value = {};
+    $scope.selectedUser.value.UserName = '';
 
     $scope.account = {
         userName: "",
@@ -15,14 +18,13 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
         role: "Member"
     };
 
-    $scope.updateUser = function () {
+    $scope.updateUser = function (account) {
         ///save user
-        authService.updateUser($scope.account).then(function (response) {
+        authService.updateUser(account).then(function (response) {
 
             $scope.savedSuccessfully = true;
-            $scope.message = "User has been updated successfully.";
-            //startTimer();
-
+            $scope.message = "User: "+ account.UserName +" has been updated successfully.";
+            
         },
          function (response) {
              var errors = [];
@@ -91,8 +93,13 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
             $scope.userStore = response.data.results;
         });
 
-    }
+    };
 
+    $scope.setSelectedUser = function (user) {
+            $scope.selectedUser.value.UserName = user;
+            console.log($scope.selectedUser);
+    };
+   
     $scope.getUsers();
     console.log($scope.userStore)
 
