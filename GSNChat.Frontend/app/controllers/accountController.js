@@ -63,7 +63,7 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
             authService.saveRegistration($scope.account).then(function (response) {
 
                 $scope.savedSuccessfully = true;
-                $scope.message = "User has been Created successfully.";
+                $scope.message = "User "+ $scope.account.userName + " has been created successfully.";
                 $scope.account = {
                     userName: "",
                     firstName: "",
