@@ -7,21 +7,29 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
     $scope.selectedUser = {};
     $scope.selectedUser.value = {};
     $scope.selectedUser.value.UserName = '';
+    $scope.changePass = false;
 
     $scope.account = {
         userName: "",
         firstName: "",
         lastName: "",
         email: "",
+        changePass : false,
         password: "",
         confirmPassword: "",
         role: "Member"
     };
-
+    $scope.setChangepass = function () {
+        if ($scope.changePass) {
+            $scope.changePass = false;
+        }else{
+            $scope.changePass = true;
+        };
+    }
     $scope.updateUser = function (account) {
         ///save user
         authService.updateUser(account).then(function (response) {
-
+            account.changePass = $scope.changePass;
             $scope.savedSuccessfully = true;
             $scope.message = "User: "+ account.UserName +" has been updated successfully.";
             

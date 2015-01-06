@@ -23,23 +23,12 @@ namespace GSNchat
         {
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-        
-            //using (AuthRepository _repo = new AuthRepository())
-            //{
-            //    IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
-
-            //    if (user == null)
-            //    {
-            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //        return;
-            //    }
-            //}
 
             var orchestrate = new Orchestrate.Net.Orchestrate("0b42c04c-0d70-4da8-a3c1-2036882369d0");
             var result = orchestrate.Search("users", context.UserName, 1);
             
             if (result.Count == 0) {
-                        context.SetError("invalid_grant", "The user name or password is incorrect.");
+                       context.SetError("invalid_grant", "The user name or password is incorrect.");
                        return;
             }
 
@@ -51,6 +40,7 @@ namespace GSNchat
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
                 identity.AddClaim(new Claim("sub", context.UserName));
+
                 if (!String.IsNullOrEmpty(user.Role))
                 {
                     identity.AddClaim(new Claim("role", user.Role));
@@ -62,6 +52,7 @@ namespace GSNchat
                 context.Validated(identity);
             }
             else {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
             

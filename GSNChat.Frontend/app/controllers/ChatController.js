@@ -38,8 +38,6 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
                 $scope.sendPrivateMessage();
             }
 
-
-            chatService.sendMessage($scope.userName, $('#chatmessage').val());
             // Clear text box and reset focus for next message.
             $('#chatmessage').val('').focus();
         };
@@ -94,7 +92,7 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
 
         chat.client.sendPrivateMessage = function (name, message, receiver) {
 
-            var chatObject = { "user": name, "message": message, "timestamp": new Date().timeNow('hh:mm:ss'), "receiver": receiver, "read":false };
+            var chatObject = { "user": name, "message": message, "timestamp": new Date().timeNow('hh:mm:ss'), "receiver": receiver, "read": false };
 
             //use apply to update view immediately
             $scope.$apply(function () {

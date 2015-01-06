@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -96,8 +97,10 @@ namespace GSNchat.Controllers
 
         // PUT api/Account
         [AllowAnonymous]
-        [HttpPut]
-        public async Task<IHttpActionResult> PutUser(UserModel userModel)
+       // [System.Web.Http.Authorize(Roles="Admin")]
+        
+        [HttpPatch]
+        public async Task<IHttpActionResult> PatchUser(UserModel userModel)
         {
 
             if (!ModelState.IsValid)
@@ -105,23 +108,19 @@ namespace GSNchat.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (userModel.ConfirmPassword.Equals(userModel.Password))
-            {
-                var hashpw = Crypto.HashPassword(userModel.Password);
-                // var hasheml = Crypto.Hash(userModel.Email);
-                userModel.Password = hashpw;
-                userModel.ConfirmPassword = hashpw;
+            if (userModel.ChangePass) {
+                userModel.Password = Crypto.HashPassword(userModel.Password);
+                userModel.ConfirmPassword = Crypto.HashPassword(userModel.ConfirmPassword);
             }
 
+            
+            var patchObj = new List<object>() { };
+            PropertyInfo[] properties = typeof(UserModel).GetProperties();
+            foreach (PropertyInfo property in properties) {
+                patchObj.Add(new { op = "replace", path = property.Name, value = property.GetValue(userModel)});
+            }
 
-            var result = orchestrate.Put("users", userModel.UserName, JsonConvert.SerializeObject(userModel));
-
-            ////IHttpActionResult errorResult = GetErrorResult(result);
-
-            //if (result.Score != 1)
-            //{
-            //    return (IHttpActionResult) result.Value;
-            //}
+            var result = orchestrate.Patch("users",userModel.UserName, patchObj);
 
             return Ok(result.ToString());
         }

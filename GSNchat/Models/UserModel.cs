@@ -40,5 +40,6 @@ namespace GSNchat.Models
         public string Role { get; set; }
 
         public string ConnectionID { get; set; }
+        public bool ChangePass { get; set; }
     }
 }

@@ -14,10 +14,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
             });
         
     };
-
+    //TODO: Fill _authentication with complete UserModel upon loggin in
     var _authentication = {
         isAuth: false,
-        userName: ""
+        userName: "",
+        role: "" 
     };
 
     var _saveRegistration = function (registration) {
@@ -30,19 +31,41 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
     };
 
+    var patchArray = [
+        {"op":"replace", "path":"", "value":""}
+    ]
+
     var _updateUser = function (account) {
 
-        return $http.put('http://localhost:41021/' + 'api/account/', account).then(function (response) {
+        //var patchObj = { "op": "replace", "path": "", "value": "" };
+        //var pathArray = [];
+
+        //$.each(account, function (index, value) {
+        //    var patchObj = { "op": "replace", "path": "", "value": "" };
+        //    patchObj.path = index;
+        //    patchObj.value = value;
+        //    patchArray.push(patchObj);
+        //});
+
+        return $http({ method: "PATCH", url: serviceBase + 'api/account/', data: account }).then(function (response) {
             return response;
         });
-    }
+
+        //return $http.patch('http://localhost:41021/' + 'api/account/', account).then(function (response) {
+        //    return response;
+        //});
+
+        //return $http.put('http://localhost:41021/' + 'api/account/', account).then(function (response) {
+        //    return response;
+        //});
+    };
 
     var _removeUser = function (account) {
 
         return $http.delete(serviceBase + 'api/account/', account).then(function (response) {
             return response;
         });
-    }
+    };
 
     var _login = function (loginData) {
 
@@ -50,7 +73,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
         var deferred = $q.defer();
 
-        $http.post('http://localhost:41021/' + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+        $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
             localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
 
@@ -74,7 +97,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
         _authentication.isAuth = false;
         _authentication.userName = "";
-
+        _authentication.role = "";
     };
 
     var _fillAuthData = function () {

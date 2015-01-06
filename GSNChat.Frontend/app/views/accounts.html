@@ -14,9 +14,12 @@
             <input type="text" class="form-control" placeholder="FirstName" ng-model="user.value.FirstName" required>
             <input type="text" class="form-control" placeholder="LastName" ng-model="user.value.LastName" required>
             <input type="text" class="form-control" placeholder="Email" ng-model="user.value.Email" required>
-            <input type="password" class="form-control" placeholder="Password" ng-model="user.value.Password" required>
-            <input type="password" class="form-control" placeholder="Confirm Password" ng-model="user.value.ConfirmPassword" required>
-
+            <input class="btn btn-default" value="Change Password" ng-click="setChangepass()" />
+            <div ng-show="changePass">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.value.Password" required>
+                <input type="password" class="form-control" placeholder="Confirm Password" ng-model="user.value.ConfirmPassword" required>
+            </div>
+            
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{user.value.Role}} <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
