@@ -64,19 +64,21 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
                         return false;
                     }
                 });
-                if (key == null) {
-                    pmStore.push({ user: chatmessage.receiver, chat: chatmessage });
+                if (key === null) {
+                  var pm = { user: chatmessage.user, chat: [] }
+                  pm.chat.push(chatmessage)
+                  pmStore.push(pm);
                 }
 
             }
-            console.log("chat received \n" + angular.toJson(pmStore));
+            console.log("chat received \n" + angular.toJson(pmStore, true));
             return true;
         },
         storePMSent: function (chatmessage) {
             var key = null;
             
 
-            if (pmStore.length == 0) {
+            if (pmStore.length === 0) {
                 var pm = { user: chatmessage.receiver, chat: [] }
                 pm.chat.push(chatmessage)
                 pmStore.push(pm);
@@ -91,10 +93,14 @@ app.factory('chatService', ['$http', '$q', 'localStorageService', function ($htt
                         return false;
                     }
                 });
-                if (key == null) {
-                    pmStore.push({ user: chatmessage.user, chat: chatmessage });
+                if (key === null) {
+                  
+                  var pm = { user: chatmessage.receiver, chat: [] }
+                  pm.chat.push(chatmessage)
+                  pmStore.push(pm);
+                  
                 }
-
+              console.log("chat sent \n" + angular.toJson(pmStore, true));
             }
 
             return true;
