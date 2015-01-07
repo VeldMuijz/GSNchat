@@ -111,22 +111,25 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
             }
         };
 
-        //Make connection to SignalR backend
-        //Have to add jsonp = true for crossdomain requests
-        $.connection.hub.start({ jsonp: true }).done(function () {
-            $scope.connected = true;
-        });
+        if (authService.isAuth) {
+            //Make connection to SignalR backend
+            //Have to add jsonp = true for crossdomain requests
+            $.connection.hub.start({ jsonp: true }).done(function () {
+                $scope.connected = true;
+            });
 
-        $.connection.hub.reconnecting(function () {
-            alert("Trying to reconnect.");
-            $scope.connected = false;
-        });
+            $.connection.hub.reconnecting(function () {
+                alert("Trying to reconnect.");
+                $scope.connected = false;
+            });
 
-        $.connection.hub.disconnected(function () {
-            $scope.connected = false;
-            if ($.connection.hub.lastError)
-            { alert("Disconnected. Reason: " + $.connection.hub.lastError.message); }
-        });
+            $.connection.hub.disconnected(function () {
+                $scope.connected = false;
+                if ($.connection.hub.lastError)
+                { alert("Disconnected. Reason: " + $.connection.hub.lastError.message); }
+            });
+        }
+        
     }
 
 
