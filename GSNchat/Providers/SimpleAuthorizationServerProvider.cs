@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using System.Web.Helpers;
+using Microsoft.Owin.Security;
 
 namespace GSNchat
 {
@@ -49,7 +50,21 @@ namespace GSNchat
                     identity.AddClaim(new Claim("role", "User"));
                 }
 
-                context.Validated(identity);
+                var props = new AuthenticationProperties(new Dictionary<string, string>
+                {
+                    { 
+                        "role", (!String.IsNullOrEmpty(user.Role)) ? user.Role : "User"
+                        
+                    },
+                    { 
+                        "userName", context.UserName
+                    }
+                });
+
+
+                var ticket = new AuthenticationTicket(identity, props);
+
+                context.Validated(ticket);
             }
             else {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
@@ -58,6 +73,15 @@ namespace GSNchat
             
             
 
+        }
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            }
+
+            return Task.FromResult<object>(null);
         }
     }
 }

@@ -36,28 +36,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
     ]
 
     var _updateUser = function (account) {
-
-        //var patchObj = { "op": "replace", "path": "", "value": "" };
-        //var pathArray = [];
-
-        //$.each(account, function (index, value) {
-        //    var patchObj = { "op": "replace", "path": "", "value": "" };
-        //    patchObj.path = index;
-        //    patchObj.value = value;
-        //    patchArray.push(patchObj);
-        //});
-
+        
         return $http({ method: "PATCH", url: serviceBase + 'api/account/', data: account }).then(function (response) {
             return response;
         });
 
-        //return $http.patch('http://localhost:41021/' + 'api/account/', account).then(function (response) {
-        //    return response;
-        //});
-
-        //return $http.put('http://localhost:41021/' + 'api/account/', account).then(function (response) {
-        //    return response;
-        //});
     };
 
     var _removeUser = function (account) {
@@ -75,10 +58,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+            localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, role: response.role });
 
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
+            _authentication.role = response.role;
 
             deferred.resolve(response);
 
