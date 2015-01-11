@@ -27,7 +27,9 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
                 $scope.changePass = true;
             };
         };
-
+        $scope.setUserRole = function (role) {
+            
+        };
         $scope.updateUser = function (account) {
             authService.updateUser(account).then(function (response) {
                 account.changePass = $scope.changePass;
@@ -47,8 +49,8 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
 
         };
 
-        $scope.removeUser = function () {
-            authService.removeUser($scope.account).then(function (response) {
+        $scope.removeUser = function (account) {
+            authService.removeUser(account).then(function (response) {
             $scope.savedSuccessfully = true;
             $scope.message = "User has been deleted successfully.";
             },
