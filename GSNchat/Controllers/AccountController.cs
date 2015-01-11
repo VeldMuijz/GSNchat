@@ -97,8 +97,7 @@ namespace GSNchat.Controllers
 
         // PUT api/Account
         [AllowAnonymous]
-       // [System.Web.Http.Authorize(Roles="Admin")]
-        
+        [System.Web.Http.Authorize(Roles="Admin")]
         [HttpPatch]
         public async Task<IHttpActionResult> PatchUser(UserModel userModel)
         {
