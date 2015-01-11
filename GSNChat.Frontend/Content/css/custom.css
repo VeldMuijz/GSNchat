@@ -34,7 +34,6 @@ html,body {
 .chatInput {
 	position: absolute;
     bottom:10%;
-	min-height: 30px;
     border-left: 1px black solid;
     border-right: 1px black solid;
     border-bottom: 1px black solid;
