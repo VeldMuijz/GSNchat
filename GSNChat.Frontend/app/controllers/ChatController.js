@@ -3,7 +3,6 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
 
     if (!authService.authentication.isAuth) {
         //no authenticated or not longer authenticated
-        alert("U bent niet (langer) aangemeld.")
         $location.path('/login');
 
     } else {
@@ -111,7 +110,7 @@ app.controller('chatController', ['$scope', '$window', '$location', 'chatService
             }
         };
 
-        if (authService.isAuth) {
+        if (authService.authentication.isAuth) {
             //Make connection to SignalR backend
             //Have to add jsonp = true for crossdomain requests
             $.connection.hub.start({ jsonp: true }).done(function () {

@@ -67,14 +67,15 @@ html,body {
 
 .sidebar {
   background-color: #CCCCCC;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar > div:last-child {
   position: absolute;
   border-top: 1px solid black;
-  width:100%;  
+  width:90%;  
   bottom:1px;
-  background-color: green;
 }
 
 @media (min-width: 768px) {

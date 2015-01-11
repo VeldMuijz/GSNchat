@@ -19,15 +19,16 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
             confirmPassword: "",
             role: "Member"
         };
+
         $scope.setChangepass = function () {
             if ($scope.changePass) {
                 $scope.changePass = false;
             } else {
                 $scope.changePass = true;
             };
-        }
+        };
+
         $scope.updateUser = function (account) {
-            ///save user
             authService.updateUser(account).then(function (response) {
                 account.changePass = $scope.changePass;
                 $scope.savedSuccessfully = true;
@@ -44,16 +45,12 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
                  $scope.message = "Failed to update user due to:" + errors.join(' ');
              });
 
-        }
+        };
 
         $scope.removeUser = function () {
-            ///save user
             authService.removeUser($scope.account).then(function (response) {
-
-                $scope.savedSuccessfully = true;
-                $scope.message = "User has been deleted successfully.";
-                //startTimer();
-
+            $scope.savedSuccessfully = true;
+            $scope.message = "User has been deleted successfully.";
             },
              function (response) {
                  var errors = [];
@@ -64,7 +61,7 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
                  }
                  $scope.message = "Failed to delete user due to:" + errors.join(' ');
              });
-        }
+        };
 
         $scope.createUser = function (account) {
 
@@ -94,7 +91,6 @@ app.controller('accountController', ['$scope', '$location', '$timeout', 'authSer
              });
 
         };
-
 
         $scope.getUsers = function () {
             authService.getUsers().then(function (response) {
