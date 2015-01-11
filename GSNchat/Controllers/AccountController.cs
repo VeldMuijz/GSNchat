@@ -116,7 +116,7 @@ namespace GSNchat.Controllers
             var patchObj = new List<object>() { };
             PropertyInfo[] properties = typeof(UserModel).GetProperties();
             foreach (PropertyInfo property in properties) {
-                patchObj.Add(new { op = "replace", path = property.Name, value = property.GetValue(userModel)});
+                patchObj.Add(new { op = "add", path = property.Name, value = property.GetValue(userModel)});
             }
 
             var result = orchestrate.Patch("users",userModel.UserName, patchObj);
@@ -126,9 +126,11 @@ namespace GSNchat.Controllers
 
 
         // DELETE: api/account/5
-        public IHttpActionResult Delete(string username)
+    [AllowAnonymous]
+    [HttpDelete]
+        public void DeleteUser(string username)
         {
-            return Ok(orchestrate.Delete("users", username,true));
+            orchestrate.Delete("users", "Test", true);
         }
 
         // GET: api/account/username
