@@ -40,7 +40,7 @@ namespace GSNchat
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-                identity.AddClaim(new Claim("sub", context.UserName));
+                identity.AddClaim(new Claim("sub", user.UserName));
 
                 if (!String.IsNullOrEmpty(user.Role))
                 {
@@ -57,7 +57,7 @@ namespace GSNchat
                         
                     },
                     { 
-                        "userName", context.UserName
+                        "userName", user.UserName
                     }
                 });
 

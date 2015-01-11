@@ -95,13 +95,18 @@ namespace GSNchat.Controllers
             return null;
         }
 
-        // PUT api/Account
-        [AllowAnonymous]
-        [System.Web.Http.Authorize(Roles="Admin")]
+        // PATCH api/Account
+        [Authorize]
+        //[System.Web.Http.Authorize(Roles="Admin")]
         [HttpPatch]
-        public async Task<IHttpActionResult> PatchUser(UserModel userModel)
+        public async Task<IHttpActionResult> PatchUser(ComplexUserModel complexObj )
         {
+            UserModel userModel = complexObj.UserModel;
+            string UserName = complexObj.UserName;
 
+            var auth = JsonConvert.DeserializeObject<UserModel>(orchestrate.Search("users", UserName, 1).Results.FirstOrDefault().Value.ToString());
+           if(auth.Role.Equals("Admin")){
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -122,17 +127,13 @@ namespace GSNchat.Controllers
             var result = orchestrate.Patch("users",userModel.UserName, patchObj);
 
             return Ok(result.ToString());
+           } else{
+           
+               return Unauthorized();
+           }
+
         }
-
-
-        // DELETE: api/account/5
-    [AllowAnonymous]
-    [HttpDelete]
-        public void DeleteUser(string username)
-        {
-            orchestrate.Delete("users", "Test", true);
-        }
-
+    
         // GET: api/account/username
     [HttpGet]    
     public Object GetUsers()
@@ -141,6 +142,15 @@ namespace GSNchat.Controllers
             return orchestrate.List("users", 100, null, null); 
         }
 
+    // DELETE: api/account/5
+    [AllowAnonymous]
+    [HttpDelete]
+    public void DeleteUser(string username)
+    {
+        orchestrate.Delete("users", "Test", true);
     }
+    
+
+}
  
 }

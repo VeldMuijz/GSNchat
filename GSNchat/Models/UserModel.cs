@@ -42,4 +42,10 @@ namespace GSNchat.Models
         public string ConnectionID { get; set; }
         public bool ChangePass { get; set; }
     }
+
+    public class ComplexUserModel {
+        public UserModel UserModel { get; set; }
+        public string UserName {get; set;}
+    
+    }
 }
