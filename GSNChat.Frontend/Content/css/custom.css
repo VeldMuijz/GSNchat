@@ -1,24 +1,84 @@
-﻿
+﻿/* CSS used here will be applied after bootstrap.css */
 html,body {
-
 	height:100%;
+  margin: 0px; 
+  padding: 0px; 
+}
+.container-fluid {
+ height: 90%;
 
 }
-.row, .container-fluid, .panel-default, .panel{
-    height:90%;
+.chatContainer {
+  min-height:100%;
+  height:100%;
 }
 
- .panel-body {
-    min-height: 530px;
-    max-height: 530px;
-    overflow-y:scroll;
+.panel {
+  max-width:83%;
+  min-height:100%;
+  height:100%;
+  bottom:1px;
+
+}
+.chatFeed {
+	position:absolute;
+    top: 95px;
+    width:81.5%;
+    bottom: 135px;
+  	overflow-y: scroll;
+  	overflow-x: hidden;
+    border: 1px black solid;
+    max-height: 70%;
 }
 
- .sidebar {
+.chatInput {
+	position: absolute;
+    bottom:10%;
+	min-height: 30px;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    border-bottom: 1px black solid;
+    max-width: 81.5%;
+}
+
+.chatMessage > div:nth-of-type(2) {
+  
+}
+
+.chatMessage > div:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.panel-body{
+    display: block;
+}
+
+.chatMessage {
+  display: block;
+  word-wrap: break-word;
+}
+
+.chatUserName {
+ border-bottom:1px solid black; 
+}
+
+
+
+.sidebar {
   background-color: #CCCCCC;
 }
 
-@media (min-width: 992px) {
+.sidebar > div:last-child {
+  position: absolute;
+  border-top: 1px solid black;
+  width:100%;  
+  bottom:1px;
+  background-color: green;
+}
+
+@media (min-width: 768px) {
   .sidebar {
     position: fixed;
     top: 50px;
@@ -29,4 +89,23 @@ html,body {
     background-color: #CCCCCC;
     overflow-y:scroll;
   }
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select{
+    max-width: 280px;
+}
+
+
 }
