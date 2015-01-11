@@ -2,7 +2,7 @@
 <html data-ng-app="AngularAuthApp">
 <head>
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
-    <title>GSNchat  {{authentication.userName}}    </title>
+    <title>GSNchat</title>
     <link href="content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link href="content/css/custom.css" rel="stylesheet" />
@@ -17,11 +17,11 @@
                 </button>
                 <a class="navbar-brand" href="#/">Home</a>
             </div>
-            <!-- TODO: Creat a link to user mgmt with checking on roles/credentials -->
             <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                 <ul class="nav navbar-nav navbar-right">
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welkom {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/chat">Chat</a></li>
+                    <li data-ng-hide="!authentication.role === 'Admin' "><a href="#/accounts">Accounts</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
