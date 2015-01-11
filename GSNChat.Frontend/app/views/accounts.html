@@ -21,16 +21,16 @@
             </div>
             
             <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{user.value.Role}} <span class="caret"></span></button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" ng-model="user.value.Role">{{user.value.Role}} <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a>User</a></li>
-                    <li><a>Admin</a></li>
+                    <li ng-click="user.value.Role='User'"><a>User</a></li>
+                    <li ng-click="user.value.Role='Admin'"><a>Admin</a></li>
                 </ul>
             </div>
             <br />
             <br />
             <button class="btn btn-lg btn-info" type="submit" data-ng-click="updateUser(user.value)">Update</button>
-            <button class="btn btn-lg btn-danger" type="submit" data-ng-click="removeUser()">Remove</button>
+            <button class="btn btn-lg btn-danger" type="submit" data-ng-click="removeUser(user.value)">Remove</button>
             <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
                 {{message}}
             </div>
@@ -49,8 +49,8 @@
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{account.role}} <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a>User</a></li>
-                    <li><a>Admin</a></li>
+                    <li ng-click="account.role='User'"><a>User</a></li>
+                    <li ng-click="account.role='Admin'"><a>Admin</a></li>
                 </ul>
             </div>
 
