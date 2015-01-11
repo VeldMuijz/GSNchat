@@ -14,6 +14,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
             });
         
     };
+
     //TODO: Fill _authentication with complete UserModel upon loggin in
     var _authentication = {
         isAuth: false,
@@ -30,10 +31,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
         });
 
     };
-
-    var patchArray = [
-        {"op":"replace", "path":"", "value":""}
-    ]
 
     var _updateUser = function (account) {
         
@@ -90,6 +87,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
         if (authData) {
             _authentication.isAuth = true;
             _authentication.userName = authData.userName;
+            _authentication.role = authData.role;
         }
 
     }
