@@ -21,7 +21,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welkom {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/chat">Chat</a></li>
-                    <li data-ng-hide="!authentication.role === 'Admin' "><a href="#/accounts">Accounts</a></li>
+                    <li data-ng-hide="authentication.role !== 'Admin' "><a href="#/accounts">Accounts</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>

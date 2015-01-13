@@ -37,6 +37,7 @@ namespace GSNchat.Models
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Role")]
+        [Required(ErrorMessage = "The role is required")]
         public string Role { get; set; }
 
         public string ConnectionID { get; set; }
