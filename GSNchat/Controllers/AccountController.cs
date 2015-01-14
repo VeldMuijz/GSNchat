@@ -136,7 +136,14 @@ namespace GSNchat.Controllers
                 PropertyInfo[] properties = typeof(UserModel).GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    patchObj.Add(new { op = "add", path = property.Name, value = property.GetValue(userModel) });
+                    if (property.Name.Contains("Password") && userModel.ChangePass) {
+                        patchObj.Add(new { op = "add", path = property.Name, value = property.GetValue(userModel) });
+                    }
+                    else if (!property.Name.Contains("Password")) {
+                        patchObj.Add(new { op = "add", path = property.Name, value = property.GetValue(userModel) });
+                    }
+                    
+                    
                 }
 
                 var result = orchestrate.Patch("users", userModel.UserName, patchObj);
